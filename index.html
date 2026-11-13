@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ofertas de Whisky</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#1d1a16;--muted:#6b6258;--brown:#7a4a1e;--red:#a8322a;--line:#e5ddd2}
+@media (prefers-color-scheme:dark){:root{--bg:#161310;--card:#211d19;--ink:#f3ede4;--muted:#a89d8f;--brown:#c98a4b;--red:#e5675d;--line:#3a332b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;border-top:8px solid var(--brown)}
+header{text-align:center;padding:40px 16px 16px}
+h1{margin:0;font-size:clamp(28px,5vw,44px)}
+header p{color:var(--muted);margin:8px 0 0}
+main{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;display:block;aspect-ratio:1400/900;object-fit:cover}
+.body{padding:16px;display:flex;flex-direction:column;gap:6px}
+.body h2{margin:0;font-size:20px}
+.old{color:var(--muted);text-decoration:line-through}
+.new{color:var(--red);font-size:28px;font-weight:800}
+.off{font-size:13px;color:var(--muted)}
+a.btn{margin-top:8px;text-align:center;background:var(--brown);color:#fff;text-decoration:none;font-weight:700;padding:12px;border-radius:10px}
+a.btn:hover{filter:brightness(1.1)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Ofertas de Whisky</h1>
+  <p>Seleção com preços promocionais na Amazon</p>
+</header>
+<main id="grid"></main>
+<footer>Preços e disponibilidade podem mudar. Confira na página da Amazon antes de comprar.</footer>
+<script>
+const items=[
+ {n:"Hibiki",img:"hibiki.jpg",url:"https://link.amazon/B01suHdJE",de:810.90,por:558.82},
+ {n:"The Macallan 12",img:"macallan-12.jpg",url:"https://link.amazon/B03mojGoh",de:739.90,por:699.90},
+ {n:"Woodford Reserve",img:"woodford-reserve.jpg",url:"https://link.amazon/B06qECmUR",de:239.90,por:179.89},
+ {n:"The Singleton 12",img:"singleton-12.jpg",url:"https://link.amazon/B0ir4d1iB",de:267.90,por:178.52},
+ {n:"Laphroaig 10",img:"laphroaig-10.jpg",url:"https://link.amazon/B0fVDwyir",de:589.90,por:459.90},
+ {n:"Aberlour 14",img:"aberlour-14.jpg",url:"https://link.amazon/B0ijGr7h7",de:529.90,por:425.70},
+ {n:"Glenmorangie Quinta Ruban 14",img:"glenmorangie-quinta-ruban-14.jpg",url:"https://link.amazon/B084klwxh",de:529.90,por:499.80}
+];
+const f=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+document.getElementById("grid").innerHTML=items.map(i=>`
+<article class="card">
+  <img src="img/${i.img}" alt="${i.n}" loading="lazy">
+  <div class="body">
+    <h2>${i.n}</h2>
+    <span class="old">de ${f(i.de)}</span>
+    <span class="new">por ${f(i.por)}</span>
+    <span class="off">${Math.round((1-i.por/i.de)*100)}% de desconto</span>
+    <a class="btn" href="${i.url}" target="_blank" rel="noopener sponsored">Comprar na Amazon</a>
+  </div>
+</article>`).join("");
+</script>
+</body>
+</html>
