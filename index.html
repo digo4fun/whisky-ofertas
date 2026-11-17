@@ -15,6 +15,9 @@ header p{color:var(--muted);margin:8px 0 0}
 main{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .card img{width:100%;display:block;aspect-ratio:1400/900;object-fit:cover}
+.wine{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:8px;padding:16px;aspect-ratio:1400/900;background:#faf8f4}
+.wine img{height:100%;max-height:100%;width:auto;margin:auto;aspect-ratio:auto;object-fit:contain}
+.qr{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#6b6258;font-size:13px}
 .body{padding:16px;display:flex;flex-direction:column;gap:6px}
 .body h2{margin:0;font-size:20px}
 .old{color:var(--muted);text-decoration:line-through}
@@ -32,6 +35,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 </header>
 <main id="grid"></main>
 <footer>Preços e disponibilidade podem mudar. Confira na página da Amazon antes de comprar.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const items=[
  {n:"Hibiki",img:"hibiki.jpg",url:"https://link.amazon/B01suHdJE",de:810.90,por:558.82},
@@ -40,12 +44,13 @@ const items=[
  {n:"The Singleton 12",img:"singleton-12.jpg",url:"https://link.amazon/B0ir4d1iB",de:267.90,por:178.52},
  {n:"Laphroaig 10",img:"laphroaig-10.jpg",url:"https://link.amazon/B0fVDwyir",de:589.90,por:459.90},
  {n:"Aberlour 14",img:"aberlour-14.jpg",url:"https://link.amazon/B0ijGr7h7",de:529.90,por:425.70},
+ {n:"Esporão Bico Amarelo 2020 Vinho Verde",img:"esporao-bico-amarelo.png",url:"https://link.amazon/B0eetWemN",de:74.00,por:47.48,wine:true},
  {n:"Glenmorangie Quinta Ruban 14",img:"glenmorangie-quinta-ruban-14.jpg",url:"https://link.amazon/B084klwxh",de:529.90,por:499.80}
 ];
 const f=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 document.getElementById("grid").innerHTML=items.map(i=>`
 <article class="card">
-  <img src="img/${i.img}" alt="${i.n}" loading="lazy">
+  ${i.wine?`<div class="wine"><img src="img/${i.img}" alt="${i.n}"><div class="qr"><div data-qr="${i.url}"></div>Aponte a câmera</div></div>`:`<img src="img/${i.img}" alt="${i.n}" loading="lazy">`}
   <div class="body">
     <h2>${i.n}</h2>
     <span class="old">de ${f(i.de)}</span>
@@ -54,6 +59,7 @@ document.getElementById("grid").innerHTML=items.map(i=>`
     <a class="btn" href="${i.url}" target="_blank" rel="noopener sponsored">Comprar na Amazon</a>
   </div>
 </article>`).join("");
+document.querySelectorAll("[data-qr]").forEach(e=>new QRCode(e,{text:e.dataset.qr,width:150,height:150}));
 </script>
 </body>
 </html>
