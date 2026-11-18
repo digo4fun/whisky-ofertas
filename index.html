@@ -3,65 +3,155 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ofertas de Whisky</title>
+<title>Ofertas de bebidas · Rondon & Co.</title>
+<meta name="description" content="Whiskies e vinhos com preço promocional, selecionados pela Rondon & Co.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/svg+xml" href="assets/monogram-ampersand.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#faf8f4;--card:#fff;--ink:#1d1a16;--muted:#6b6258;--brown:#7a4a1e;--red:#a8322a;--line:#e5ddd2}
-@media (prefers-color-scheme:dark){:root{--bg:#161310;--card:#211d19;--ink:#f3ede4;--muted:#a89d8f;--brown:#c98a4b;--red:#e5675d;--line:#3a332b}}
+:root{
+  --surface-000:#000000;--surface-100:#0f0e0c;--surface-200:#1b1915;
+  --ink:#f5eee2;--ink-muted:#bdb5a8;--ink-subtle:#948d82;
+  --gold:#c0995c;--gold-light:#d8b77e;--gold-deep:#a88c60;
+  --hairline:#3a342b;
+  --font-serif:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;
+  --font-sans:Montserrat,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;border-top:8px solid var(--brown)}
-header{text-align:center;padding:40px 16px 16px}
-h1{margin:0;font-size:clamp(28px,5vw,44px)}
-header p{color:var(--muted);margin:8px 0 0}
-main{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-.card img{width:100%;display:block;aspect-ratio:1400/900;object-fit:cover}
-.wine{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:8px;padding:16px;aspect-ratio:1400/900;background:#faf8f4}
-.card .wine{overflow:hidden}
-.card .wine img{height:100%;width:auto;max-width:100%;min-height:0;margin:auto;aspect-ratio:auto;object-fit:contain}
-.wine>*{min-height:0;height:100%}
-.qr{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#6b6258;font-size:13px}
-.body{padding:16px;display:flex;flex-direction:column;gap:6px}
-.body h2{margin:0;font-size:20px}
-.old{color:var(--muted);text-decoration:line-through}
-.new{color:var(--red);font-size:28px;font-weight:800}
-.off{font-size:13px;color:var(--muted)}
-a.btn{margin-top:8px;text-align:center;background:var(--brown);color:#fff;text-decoration:none;font-weight:700;padding:12px;border-radius:10px}
-a.btn:hover{filter:brightness(1.1)}
-footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40px}
+html{background:var(--surface-000)}
+body{margin:0;background:var(--surface-000);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:26px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--font-serif);font-weight:500;text-wrap:balance}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:16px;font-size:12px;line-height:16px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before,.eyebrow::after{content:"";flex:0 0 48px;border-top:1px solid var(--gold-deep)}
+.eyebrow span{padding-left:.32em}
+
+header.top{padding:32px 0 24px;border-bottom:1px solid var(--hairline);display:flex;justify-content:space-between;align-items:center;gap:16px}
+header.top img{width:180px;height:auto;display:block}
+header.top .tag{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-subtle)}
+.hero{text-align:center;padding:80px 0 56px;display:grid;gap:24px;justify-items:center}
+.hero h1{font-size:clamp(40px,7vw,72px);line-height:1.05;letter-spacing:.02em;text-transform:uppercase}
+.hero p{color:var(--ink-muted);font-size:18px;line-height:30px;max-width:520px}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px 24px;flex-wrap:wrap;padding:16px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-bottom:48px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:500 13px/18px var(--font-sans);letter-spacing:.14em;text-transform:uppercase;min-height:44px;padding:0 20px;background:transparent;color:var(--ink-muted);border:1px solid transparent;border-radius:0;cursor:pointer}
+.tab:hover{color:var(--ink)}
+.tab[aria-pressed="true"]{color:var(--gold);border-color:var(--gold-deep)}
+.tab span{color:var(--ink-subtle);margin-left:6px}
+.sort{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-subtle)}
+.sort select{font:500 13px/18px var(--font-sans);letter-spacing:.14em;text-transform:uppercase;min-height:44px;padding:0 16px;background:var(--surface-000);color:var(--ink);border:1px solid var(--gold-deep);border-radius:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:48px 32px;padding-bottom:16px}
+.card{background:var(--surface-100);border:1px solid var(--hairline);display:flex;flex-direction:column;min-width:0}
+.card:hover{background:var(--surface-200)}
+.photo{height:320px;padding:32px 24px 8px;display:flex;align-items:center;justify-content:center}
+.photo img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;display:block}
+.cbody{padding:24px 32px 32px;display:flex;flex-direction:column;gap:12px;flex:1}
+.cat{font-size:12px;line-height:16px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-subtle)}
+.card h2{font-size:30px;line-height:36px}
+.off{align-self:flex-start;border:1px solid var(--gold-deep);padding:2px 10px;font-size:12px;line-height:20px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.prices{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:4px}
+.old{font-size:14px;color:var(--ink-subtle);text-decoration:line-through}
+.price{font-family:var(--font-serif);font-size:30px;line-height:36px;color:var(--gold)}
+.cfoot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:auto;padding-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;font:600 13px/18px var(--font-sans);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--gold);border:1px solid var(--gold-deep);transition:color .2s,border-color .2s}
+.btn:hover{color:var(--gold-light);border-color:var(--gold-light)}
+.qr{background:var(--ink);padding:6px;line-height:0;flex:none}
+.qr img,.qr canvas{width:72px!important;height:72px!important;display:block}
+
+footer{margin-top:80px;padding:24px 0 64px;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-size:13px;line-height:20px;color:var(--ink-subtle)}
+footer p{max-width:640px}
+footer img{width:36px;height:auto;display:block}
+
+@media (max-width:720px){.qr{display:none}.photo{height:260px}.cbody{padding:24px}.hero{padding:56px 0 40px}header.top .tag{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Ofertas de Whisky</h1>
-  <p>Seleção com preços promocionais na Amazon</p>
-</header>
-<main id="grid"></main>
-<footer>Preços e disponibilidade podem mudar. Confira na página da Amazon antes de comprar.</footer>
+<div class="wrap">
+  <header class="top">
+    <img src="assets/rondon-co-logo.svg" alt="Rondon & Co. Experiences" width="180" height="43">
+    <span class="tag">Ofertas</span>
+  </header>
+
+  <section class="hero">
+    <p class="eyebrow"><span>Seleção</span></p>
+    <h1>Ofertas de bebidas</h1>
+    <p>Whiskies e vinhos com preço promocional, escolhidos por nós.</p>
+  </section>
+
+  <div class="toolbar">
+    <div class="tabs" id="tabs" role="group" aria-label="Categorias"></div>
+    <label class="sort">Ordenar
+      <select id="sort">
+        <option value="off">Maior desconto</option>
+        <option value="low">Menor preço</option>
+        <option value="high">Maior preço</option>
+      </select>
+    </label>
+  </div>
+
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <footer>
+    <p>Como participante do Programa de Associados da Amazon, podemos receber comissão por compras qualificadas feitas pelos links. Preços e disponibilidade mudam. Confira na Amazon antes de comprar.</p>
+    <img src="assets/monogram-ampersand.svg" alt="Rondon & Co.">
+  </footer>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const items=[
- {n:"Hibiki",img:"hibiki.jpg",url:"https://link.amazon/B01suHdJE",de:810.90,por:558.82},
- {n:"The Macallan 12",img:"macallan-12.jpg",url:"https://link.amazon/B03mojGoh",de:739.90,por:699.90},
- {n:"Woodford Reserve",img:"woodford-reserve.jpg",url:"https://link.amazon/B06qECmUR",de:239.90,por:179.89},
- {n:"The Singleton 12",img:"singleton-12.jpg",url:"https://link.amazon/B0ir4d1iB",de:267.90,por:178.52},
- {n:"Laphroaig 10",img:"laphroaig-10.jpg",url:"https://link.amazon/B0fVDwyir",de:589.90,por:459.90},
- {n:"Aberlour 14",img:"aberlour-14.jpg",url:"https://link.amazon/B0ijGr7h7",de:529.90,por:425.70},
- {n:"Esporão Bico Amarelo 2020 Vinho Verde",img:"esporao-bico-amarelo.png",url:"https://link.amazon/B0eetWemN",de:74.00,por:47.48,wine:true},
- {n:"Glenmorangie Quinta Ruban 14",img:"glenmorangie-quinta-ruban-14.jpg",url:"https://link.amazon/B084klwxh",de:529.90,por:499.80}
+/* Para adicionar um produto: copie uma linha, troque os dados e a categoria (cat). Novas categorias criam uma nova aba. */
+var items=[
+ {n:"Esporão Bico Amarelo 2020 Vinho Verde",cat:"Vinhos",img:"img/esporao-bico-amarelo.png",url:"https://link.amazon/B0eetWemN",de:74.00,por:47.48},
+ {n:"The Singleton 12",cat:"Whiskies",img:"img/singleton-12.png",url:"https://link.amazon/B0ir4d1iB",de:267.90,por:178.52},
+ {n:"Hibiki Japanese Harmony",cat:"Whiskies",img:"img/hibiki.png",url:"https://link.amazon/B01suHdJE",de:810.90,por:558.82},
+ {n:"Woodford Reserve",cat:"Whiskies",img:"img/woodford-reserve.png",url:"https://link.amazon/B06qECmUR",de:239.90,por:179.89},
+ {n:"Laphroaig 10",cat:"Whiskies",img:"img/laphroaig-10.png",url:"https://link.amazon/B0fVDwyir",de:589.90,por:459.90},
+ {n:"Aberlour 14",cat:"Whiskies",img:"img/aberlour-14.png",url:"https://link.amazon/B0ijGr7h7",de:529.90,por:425.70},
+ {n:"Glenmorangie Quinta Ruban 14",cat:"Whiskies",img:"img/glenmorangie-quinta-ruban-14.png",url:"https://link.amazon/B084klwxh",de:529.90,por:499.80},
+ {n:"The Macallan 12",cat:"Whiskies",img:"img/macallan-12.png",url:"https://link.amazon/B03mojGoh",de:739.90,por:699.90}
 ];
-const f=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-document.getElementById("grid").innerHTML=items.map(i=>`
-<article class="card">
-  ${i.wine?`<div class="wine"><img src="img/${i.img}" alt="${i.n}"><div class="qr"><div data-qr="${i.url}"></div>Aponte a câmera</div></div>`:`<img src="img/${i.img}" alt="${i.n}" loading="lazy">`}
-  <div class="body">
-    <h2>${i.n}</h2>
-    <span class="old">de ${f(i.de)}</span>
-    <span class="new">por ${f(i.por)}</span>
-    <span class="off">${Math.round((1-i.por/i.de)*100)}% de desconto</span>
-    <a class="btn" href="${i.url}" target="_blank" rel="noopener sponsored">Comprar na Amazon</a>
-  </div>
-</article>`).join("");
-document.querySelectorAll("[data-qr]").forEach(e=>new QRCode(e,{text:e.dataset.qr,width:150,height:150}));
+items.forEach(function(i){i.off=Math.round((1-i.por/i.de)*100)});
+var fmt=function(v){return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})};
+var esc=function(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")};
+var state={cat:"Todas",sort:"off"};
+var tabsEl=document.getElementById("tabs"),gridEl=document.getElementById("grid"),sortEl=document.getElementById("sort");
+function cats(){var c=["Todas"];items.forEach(function(i){if(c.indexOf(i.cat)<0)c.push(i.cat)});return c}
+function count(c){return c==="Todas"?items.length:items.filter(function(i){return i.cat===c}).length}
+function renderTabs(){
+  tabsEl.innerHTML=cats().map(function(c){
+    return '<button class="tab" type="button" data-cat="'+esc(c)+'" aria-pressed="'+(c===state.cat)+'">'+esc(c)+'<span>'+count(c)+'</span></button>';
+  }).join("");
+}
+function renderGrid(){
+  var list=items.filter(function(i){return state.cat==="Todas"||i.cat===state.cat});
+  list.sort(function(a,b){
+    if(state.sort==="low")return a.por-b.por;
+    if(state.sort==="high")return b.por-a.por;
+    return (b.de-b.por)/b.de-(a.de-a.por)/a.de;
+  });
+  gridEl.innerHTML=list.map(function(i){
+    return '<article class="card"><div class="photo"><img src="'+i.img+'" alt="Garrafa de '+esc(i.n)+'" loading="lazy"></div><div class="cbody">'
+      +'<span class="cat">'+esc(i.cat)+'</span><h2>'+esc(i.n)+'</h2>'
+      +'<span class="off">'+i.off+'% de desconto</span>'
+      +'<div class="prices"><span class="old">de '+fmt(i.de)+'</span><span class="price">por '+fmt(i.por)+'</span></div>'
+      +'<div class="cfoot"><a class="btn" href="'+i.url+'" target="_blank" rel="noopener sponsored">Comprar na Amazon</a>'
+      +'<div class="qr" data-qr="'+i.url+'" role="img" aria-label="QR code para comprar '+esc(i.n)+'"></div></div></div></article>';
+  }).join("");
+  if(window.QRCode){gridEl.querySelectorAll("[data-qr]").forEach(function(e){
+    new QRCode(e,{text:e.dataset.qr,width:120,height:120,colorDark:"#000000",colorLight:"#f5eee2"});
+  })}
+}
+tabsEl.addEventListener("click",function(e){var b=e.target.closest(".tab");if(!b)return;state.cat=b.dataset.cat;renderTabs();renderGrid()});
+sortEl.addEventListener("change",function(){state.sort=sortEl.value;renderGrid()});
+renderTabs();renderGrid();
 </script>
 </body>
 </html>
